@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  loading: false,
   user: {},
 };
 
@@ -8,13 +9,12 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    // increment: (state) => {
-    //   state.value += 1;
-    // },
+    setLoading: (state) => {
+      return { ...state, loading: !state.loading };
+    },
   },
 });
 
-// Action creators are generated for each case reducer function
-export const {} = authSlice.actions;
+export const { setLoading } = authSlice.actions;
 
 export default authSlice.reducer;

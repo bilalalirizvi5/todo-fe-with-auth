@@ -5,6 +5,7 @@ import { Login, Signup } from "@screens";
 // import Login from '../pages/Login/Login'
 
 import PrivateWrapper from "./PrivateRoutes";
+import AuthWrapper from "./AuthRoutes";
 
 const Routers = () => {
   return (
@@ -13,8 +14,10 @@ const Routers = () => {
         <Route element={<PrivateWrapper />}>
           <Route path="/" exact element={<Home />} />
         </Route>
-        <Route path="/login" exact element={<Login />} />
-        <Route path="/signup" exact element={<Signup />} />
+        <Route element={<AuthWrapper />}>
+          <Route path="/login" exact element={<Login />} />
+          <Route path="/signup" exact element={<Signup />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

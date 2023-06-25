@@ -6,7 +6,10 @@
       "@screens": ["screens"],
       "@components": ["components"],
       "@styledComponents/*": ["components/styledComponents/*"],
-      "@images/*": ["assets/images/*"]
+      "@images/*": ["assets/images/*"],
+      "@redux/*": ["redux/*"],
+      "@slices/*": ["redux/slices/*"],
+      "@services/*": ["redux/services/*"]
     }
   },
   "exclude": ["node_modules"]

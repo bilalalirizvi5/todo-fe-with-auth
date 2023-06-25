@@ -12,8 +12,14 @@ import { SmallLoading } from "@styledComponents/Progress";
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { loginUser } from "@services/auth";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const { loading } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+
   const loginSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Required"),
     password: Yup.string()
@@ -35,8 +41,8 @@ const Login = () => {
       password: "",
     },
     validationSchema: loginSchema,
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      await loginUser(values, resetForm, navigate);
     },
   });
 
@@ -75,8 +81,12 @@ const Login = () => {
             <ErrorText>{errors.password}</ErrorText>
           )}
         </InputWrapper>
-        <Button disabled={false} variant="contained" type="submit">
-          {false ? <SmallLoading size={25} /> : "Login"}
+        <Button
+          disabled={loading ? true : false}
+          variant="contained"
+          type="submit"
+        >
+          {loading ? <SmallLoading size={25} /> : "Login"}
         </Button>
       </AuthBox>
     </AuthContainer>
