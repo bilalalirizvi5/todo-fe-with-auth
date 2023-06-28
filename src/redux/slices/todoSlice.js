@@ -2,43 +2,46 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   loading: false,
-  todos: [
-    {
-      todo: "Develope Application",
-      description: "This apllication develope using React Js.",
-      createdAt: new Date(),
-      dueDate: new Date(),
-      status: "Not Yet Started",
-    },
-    {
-      todo: "Develope Application",
-      description: "This apllication develope using React Js.",
-      createdAt: new Date(),
-      dueDate: new Date(),
-      status: "Active",
-    },
-    {
-      todo: "Develope Application",
-      description: "This apllication develope using React Js.",
-      createdAt: new Date(),
-      dueDate: new Date(),
-      status: "Paused",
-    },
-    {
-      todo: "Develope Application",
-      description: "This apllication develope using React Js.",
-      createdAt: new Date(),
-      dueDate: new Date(),
-      status: "Dropped",
-    },
-    {
-      todo: "Develope Application",
-      description: "This apllication develope using React Js.",
-      createdAt: new Date(),
-      dueDate: new Date(),
-      status: "Completed",
-    },
-  ],
+  todos: {
+    total: 0,
+    data: [
+      {
+        todo: "Develope Application",
+        description: "This apllication develope using React Js.",
+        createdAt: new Date(),
+        dueDate: new Date(),
+        status: "Not Started",
+      },
+      {
+        todo: "Develope Application",
+        description: "This apllication develope using React Js.",
+        createdAt: new Date(),
+        dueDate: new Date(),
+        status: "Active",
+      },
+      {
+        todo: "Develope Application",
+        description: "This apllication develope using React Js.",
+        createdAt: new Date(),
+        dueDate: new Date(),
+        status: "Paused",
+      },
+      {
+        todo: "Develope Application",
+        description: "This apllication develope using React Js.",
+        createdAt: new Date(),
+        dueDate: new Date(),
+        status: "Dropped",
+      },
+      {
+        todo: "Develope Application",
+        description: "This apllication develope using React Js.",
+        createdAt: new Date(),
+        dueDate: new Date(),
+        status: "Completed",
+      },
+    ],
+  },
 };
 
 export const todoSlice = createSlice({
@@ -54,7 +57,6 @@ export const todoSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { setLoading, setTodos } = todoSlice.actions;
 
 export default todoSlice.reducer;

@@ -21,7 +21,14 @@ import {
   TableRow,
   PaginationWrapper,
 } from "@styledComponents/Table";
-import { CreateTodo, DeleteIcon, EditIcon, Loader } from "@components";
+import {
+  CreateTodo,
+  DeleteIcon,
+  EditIcon,
+  Loader,
+  StatusButton,
+  UpdateStatus,
+} from "@components";
 
 import moment from "moment";
 import { useSelector } from "react-redux";
@@ -30,17 +37,6 @@ import { FilterButtonMenu } from "components/FilterButtonMenu";
 
 const Home = () => {
   const { loading, todos } = useSelector((state) => state.todo);
-
-  const getColor = (key) => {
-    let color = {
-      "not yet started": "#f0f1f2",
-      active: "#acfab3",
-      paused: "#fae3ac",
-      completed: "#ff9c9c",
-      dropped: "#9daaf5",
-    };
-    return color[key?.toLowerCase()];
-  };
 
   const editHandle = (event, id) => {};
 
@@ -83,7 +79,7 @@ const Home = () => {
                   </TableHeader>
                 </TableHead>
                 <TableBody>
-                  {todos?.map((v, i) => (
+                  {todos?.data?.map((v, i) => (
                     <TableRow key={i}>
                       <TableCell>{i + 1}</TableCell>
                       <TableCell>{v?.todo}</TableCell>
@@ -94,17 +90,8 @@ const Home = () => {
                       <TableCell sx={{ width: "115px" }}>
                         {moment(v?.dueDate).format("DD-MMM-YYYY")}
                       </TableCell>
-                      <TableCell sx={{ width: "160px" }}>
-                        <Box
-                          sx={{
-                            ...styles.statusBtn,
-                            backgroundColor: getColor(v?.status),
-                          }}
-                        >
-                          <Typography sx={styles.statusText}>
-                            {v?.status}
-                          </Typography>
-                        </Box>
+                      <TableCell>
+                        <UpdateStatus status={v?.status} />
                       </TableCell>
                       <TableCell
                         sx={styles.view}
@@ -153,17 +140,6 @@ const styles = {
     flexDirection: "row !important",
     alignItems: "center !important",
     justifyContent: "space-between !important",
-  },
-  statusBtn: {
-    padding: "5px 19px",
-    borderRadius: "20px",
-    cursor: "pointer",
-  },
-  statusText: {
-    fontSize: "13px",
-    color: "black",
-    textAlign: "center",
-    fontWeight: "500",
   },
   view: { cursor: "pointer", color: "#537FE7" },
 };

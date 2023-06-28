@@ -3,3 +3,4 @@ export * from "./ActionsIcon";
 export * from "./Loader";
 export * from "./Modals";
 export * from "./SelectBox";
+export * from "./StatusButton";

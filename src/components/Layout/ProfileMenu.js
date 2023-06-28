@@ -1,27 +1,37 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
-import ClickAwayListener from "@mui/material/ClickAwayListener";
-import Grow from "@mui/material/Grow";
-import Paper from "@mui/material/Paper";
-import Popper from "@mui/material/Popper";
-import MenuItem from "@mui/material/MenuItem";
-import MenuList from "@mui/material/MenuList";
-import Stack from "@mui/material/Stack";
-import { Avatar, Box, IconButton, Typography } from "@mui/material";
+import {
+  ClickAwayListener,
+  Grow,
+  Paper,
+  Popper,
+  MenuItem,
+  MenuList,
+  Stack,
+  Avatar,
+  Box,
+  IconButton,
+  Typography,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const ProfileMenu = () => {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
+  const navigate = useNavigate();
+  const userName = localStorage.getItem("userName");
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleClose = (event) => {
+  const handleClose = (event, trigger) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
-
+    if (trigger === "logout") {
+      localStorage.clear();
+      navigate("/login");
+    }
     setOpen(false);
   };
 
@@ -49,7 +59,7 @@ const ProfileMenu = () => {
       <div>
         <Box sx={styles.box}>
           <Stack spacing={0.5}>
-            <Typography sx={styles.name}>Bilal Ali</Typography>
+            <Typography sx={styles.name}>{userName}</Typography>
             {/* <Typography sx={styles.role}>Admin</Typography> */}
           </Stack>
           {/* <Tooltip title="Account settings"> */}
@@ -60,13 +70,13 @@ const ProfileMenu = () => {
             aria-expanded={open ? "true" : undefined}
             aria-haspopup="true"
             onClick={handleToggle}
+            disableRipple
           >
             <Avatar
               src={"/profile.png"}
-              alt={"Thomas Anree"}
+              alt={`${userName}`}
               sx={{ width: 45, height: 45 }}
             />
-            {/* <ExpandMoreIcon sx={{ marginLeft: "5px" }} /> */}
           </IconButton>
           {/* </Tooltip> */}
         </Box>
@@ -75,9 +85,10 @@ const ProfileMenu = () => {
           open={open}
           anchorEl={anchorRef.current}
           role={undefined}
-          placement="bottom-start"
+          placement="bottom-end"
           transition
           disablePortal
+          sx={{ minWidth: "150px" }}
         >
           {({ TransitionProps, placement }) => (
             <Grow
@@ -95,9 +106,11 @@ const ProfileMenu = () => {
                     aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
                   >
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                    <MenuItem onClick={handleClose}>My account</MenuItem>
-                    <MenuItem onClick={handleClose}>Logout</MenuItem>
+                    {/* <MenuItem onClick={handleClose}>Profile</MenuItem> */}
+                    {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
+                    <MenuItem onClick={(e) => handleClose(e, "logout")}>
+                      Logout
+                    </MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
@@ -123,7 +136,7 @@ const styles = {
     textAlign: "right",
     lineHeight: 1,
     fontWeight: 500,
-    fontSize: "14px",
+    fontSize: "16px",
   },
   role: {
     color: "#637381",

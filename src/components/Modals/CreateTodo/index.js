@@ -21,11 +21,14 @@ const CreateStaffRole = () => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    resetForm();
+  };
 
   const createStaffSchema = Yup.object().shape({
-    todo: Yup.string().required("Required"),
-    description: Yup.string().required("Required"),
+    todo: Yup.string().trim().required("Required"),
+    description: Yup.string().trim().required("Required"),
     status: Yup.string().required("Required"),
     dueDate: Yup.string().required("Required"),
   });
@@ -139,7 +142,7 @@ const CreateStaffRole = () => {
                   <SelectBox
                     name="status"
                     data={[
-                      { value: "Not Yet Started", label: "Not Yet Started" },
+                      { value: "Not Started", label: "Not Started" },
                       { value: "Active", label: "Active" },
                       { value: "Paused", label: "Paused" },
                       { value: "Dropped", label: "Dropped" },

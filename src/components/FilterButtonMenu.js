@@ -46,9 +46,9 @@ export const FilterButtonMenu = ({ handleFilter }) => {
       >
         <MenuItem
           sx={{ fontSize: "13px" }}
-          onClick={() => handleClose("Not Yet Started")}
+          onClick={() => handleClose("Not Started")}
         >
-          <FaLongArrowAltDown /> &nbsp; Not Yet Started
+          <FaLongArrowAltDown /> &nbsp; Not Started
         </MenuItem>
         <MenuItem
           sx={{ fontSize: "13px" }}

@@ -1,9 +1,13 @@
 import React from "react";
+
 import { Typography, MenuItem } from "@mui/material";
+
 import { TextField } from "@styledComponents/Inputs";
 
+import { MdExpandMore } from "react-icons/md";
+
 export const SelectBox = (props) => {
-  const { data, name, value, onChange, onBlur, border = "#C8C8C8" } = props;
+  const { data, name, value, onChange, onBlur } = props;
 
   const selectedLabel = data?.find((option) => option.value === value)?.label;
 
@@ -13,12 +17,7 @@ export const SelectBox = (props) => {
       fullWidth
       size="small"
       variant="outlined"
-      sx={{
-        ...styles.textField,
-        // "& fieldset": {
-        //   border: `1px solid ${border}`,
-        // },
-      }}
+      sx={styles.textField}
       select
       InputLabelProps={{ shrink: true }}
       name={name}
@@ -33,6 +32,9 @@ export const SelectBox = (props) => {
           }
           return selectedLabel;
         },
+        IconComponent: () => (
+          <MdExpandMore style={{ fontSize: "25px", marginRight: "10px" }} />
+        ),
       }}
     >
       <MenuItem value="" disabled>
