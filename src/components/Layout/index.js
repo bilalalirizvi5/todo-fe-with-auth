@@ -17,13 +17,10 @@ import {
 } from "@mui/material";
 
 // Icon
-// import MenuIcon from "@mui/icons-material/Menu";
-import { HiOutlineChartBar } from "react-icons/hi";
+import { GiHamburgerMenu } from "react-icons/gi";
 import { FiSearch, FiSettings } from "react-icons/fi";
 import { BsChatDots } from "react-icons/bs";
 import { TfiBell } from "react-icons/tfi";
-import { RiFileUserLine, RiParentLine } from "react-icons/ri";
-import { MdGroups } from "react-icons/md";
 import { AiOutlineHome } from "react-icons/ai";
 
 // Component
@@ -32,7 +29,7 @@ import Navlink from "./Navlink";
 
 const drawerWidth = 260;
 
-const Layout = (props) => {
+export const Layout = (props) => {
   const { window, children } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -79,8 +76,7 @@ const Layout = (props) => {
             onClick={handleDrawerToggle}
             sx={{ display: { md: "none" }, marginLeft: "0px" }}
           >
-            {/* <MenuIcon sx={{ fontSize: "30px" }} /> */}
-            Menu Icon
+            <GiHamburgerMenu sx={{ fontSize: "30px" }} />
           </IconButton>
           <Box sx={styles.header}>
             <Stack
@@ -199,10 +195,7 @@ const Layout = (props) => {
         <Toolbar />
         {/* ALL PAGES RENDER HERE */}
         {children}
-        <Box sx={{ paddingBottom: "150px" }}></Box>
       </Box>
     </Box>
   );
 };
-
-export default Layout;

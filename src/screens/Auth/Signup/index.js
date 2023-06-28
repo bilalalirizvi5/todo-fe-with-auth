@@ -6,7 +6,13 @@ import {
   InputWrapper,
 } from "@styledComponents/wrappers";
 import { AuthHeading } from "@styledComponents/Headings";
-import { ErrorText, Label, TextField } from "@styledComponents/Inputs";
+import {
+  AccountText,
+  ErrorText,
+  Label,
+  LinkText,
+  TextField,
+} from "@styledComponents/Inputs";
 import { Button } from "@styledComponents/Buttons";
 import { SmallLoading } from "@styledComponents/Progress";
 
@@ -15,6 +21,7 @@ import * as Yup from "yup";
 import { useSelector } from "react-redux";
 import { createUser } from "@services/auth";
 import { useNavigate } from "react-router-dom";
+import { Divider } from "@mui/material";
 
 const Signup = () => {
   const { loading } = useSelector((state) => state.auth);
@@ -129,6 +136,11 @@ const Signup = () => {
         >
           {loading ? <SmallLoading size={25} /> : "Sign Up"}
         </Button>
+        <Divider sx={{ width: "100%", marginTop: "10px" }} />
+        <AccountText>
+          Already have an account?{" "}
+          <LinkText onClick={() => navigate("/login")}>Login</LinkText>
+        </AccountText>
       </AuthBox>
     </AuthContainer>
   );

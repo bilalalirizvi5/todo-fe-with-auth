@@ -25,3 +25,15 @@ export const ErrorText = styled(Typography)(({ theme }) => ({
   fontSize: "13px",
   color: "red",
 }));
+
+export const AccountText = styled(Typography)(({ theme }) => ({
+  fontSize: "13px",
+  color: "black",
+}));
+
+export const LinkText = styled("span")(({ theme }) => ({
+  fontSize: "13px",
+  color: "blue",
+  textDecoration: "underline",
+  cursor: "pointer",
+}));

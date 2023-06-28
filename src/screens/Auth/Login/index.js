@@ -6,7 +6,13 @@ import {
   InputWrapper,
 } from "@styledComponents/wrappers";
 import { AuthHeading } from "@styledComponents/Headings";
-import { ErrorText, Label, TextField } from "@styledComponents/Inputs";
+import {
+  AccountText,
+  ErrorText,
+  Label,
+  LinkText,
+  TextField,
+} from "@styledComponents/Inputs";
 import { Button } from "@styledComponents/Buttons";
 import { SmallLoading } from "@styledComponents/Progress";
 
@@ -15,6 +21,7 @@ import * as Yup from "yup";
 import { loginUser } from "@services/auth";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Divider, Typography } from "@mui/material";
 
 const Login = () => {
   const { loading } = useSelector((state) => state.auth);
@@ -88,6 +95,11 @@ const Login = () => {
         >
           {loading ? <SmallLoading size={25} /> : "Login"}
         </Button>
+        <Divider sx={{ width: "100%", marginTop: "10px" }} />
+        <AccountText>
+          Don't have an account?{" "}
+          <LinkText onClick={() => navigate("/signup")}>Sign Up</LinkText>
+        </AccountText>
       </AuthBox>
     </AuthContainer>
   );

@@ -25,3 +25,7 @@ code {
   );
   box-shadow: inset 4px 0px 0px black;
 }
+
+.MuiInputBase-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border: 1px solid black !important; /* Change the border color to your desired color */
+}
