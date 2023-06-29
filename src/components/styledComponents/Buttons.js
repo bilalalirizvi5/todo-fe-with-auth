@@ -10,6 +10,7 @@ export const Button = styled(MuiButton)(({ theme }) => ({
   fontWeight: "bold",
   "&.Mui-disabled": {
     backgroundColor: theme.palette.primary.main,
+    color: "rgb(220,220,220)",
   },
   "&:hover": {
     boxShadow: "none",

@@ -2,8 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   loading: false,
+  page: 1,
   todos: {
-    total: 0,
+    total: 5,
     data: [
       {
         todo: "Develope Application",
@@ -51,12 +52,15 @@ export const todoSlice = createSlice({
     setLoading: (state, payload) => {
       return { ...state, loading: payload };
     },
+    setPage: (state, payload) => {
+      return { ...state, page: payload };
+    },
     setTodos: (state, payload) => {
       return { ...state, todos: payload };
     },
   },
 });
 
-export const { setLoading, setTodos } = todoSlice.actions;
+export const { setLoading, setPage, setTodos } = todoSlice.actions;
 
 export default todoSlice.reducer;

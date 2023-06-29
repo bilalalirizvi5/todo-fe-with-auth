@@ -47,6 +47,13 @@ export const Layout = (props) => {
           <AiOutlineHome style={{ ...styles.navlinkIcon, fontSize: "16px" }} />
         }
       />
+      <Navlink
+        to="/settings"
+        name={"Settings"}
+        icon={
+          <FiSettings style={{ ...styles.navlinkIcon, fontSize: "16px" }} />
+        }
+      />
     </div>
   );
 

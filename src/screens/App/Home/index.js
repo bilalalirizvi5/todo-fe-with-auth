@@ -7,7 +7,6 @@ import {
   TableCell,
   TableBody,
   Pagination,
-  Typography,
 } from "@mui/material";
 
 // Components
@@ -26,21 +25,24 @@ import {
   DeleteIcon,
   EditIcon,
   Loader,
-  StatusButton,
   UpdateStatus,
 } from "@components";
-
-import moment from "moment";
-import { useSelector } from "react-redux";
 import { FilterBox } from "@styledComponents/Filter";
 import { FilterButtonMenu } from "components/FilterButtonMenu";
 
+import { useSelector, useDispatch } from "react-redux";
+import { setPage } from "@redux/slices/todoSlice";
+import moment from "moment";
+
 const Home = () => {
-  const { loading, todos } = useSelector((state) => state.todo);
+  const { loading, page, todos } = useSelector((state) => state.todo);
+  const dispatch = useDispatch();
 
-  const editHandle = (event, id) => {};
+  const handleEdit = (event, id) => {};
 
-  const deleteHandle = (event, id) => {};
+  const handleDelete = (event, id) => {};
+
+  const handlePage = (page) => dispatch(setPage(page));
 
   return (
     <Box>
@@ -102,14 +104,14 @@ const Home = () => {
                       <TableCell sx={{ paddingBlock: "0px !important" }}>
                         <EditIcon
                           onClick={(event) => {
-                            editHandle(event, v?._id);
+                            handleEdit(event, v?._id);
                           }}
                         />
                       </TableCell>
                       <TableCell sx={{ paddingBlock: "0px !important" }}>
                         <DeleteIcon
                           onClick={(event) => {
-                            deleteHandle(event, v?._id);
+                            handleDelete(event, v?._id);
                           }}
                         />
                       </TableCell>
@@ -120,10 +122,12 @@ const Home = () => {
             </TableContainer>
             <PaginationWrapper>
               <Pagination
-                count={10}
+                count={Math.ceil(todos?.total / 10)}
+                page={page}
                 shape="rounded"
                 hidePrevButton
                 hideNextButton
+                onChange={(_, page) => handlePage(page)}
               />
             </PaginationWrapper>
           </MainTable>

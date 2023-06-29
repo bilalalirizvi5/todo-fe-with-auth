@@ -10,8 +10,7 @@ const Navlink = ({ to, name, icon, count }) => {
   return (
     <NavLink
       to={to}
-      style={{ textDecoration: "none" }}
-      className={({ isActive }) => (isActive ? "active" : "")}
+      className={({ isActive }) => (isActive ? "active" : "inactive")}
     >
       <Stack
         direction="row"

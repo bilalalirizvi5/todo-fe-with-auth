@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 
-import { Menu, MenuItem } from "@mui/material";
+import { Box, Menu, MenuItem } from "@mui/material";
 
 import { FilterButton } from "@styledComponents/Filter";
 
 // Icon
 import { BsFilter } from "react-icons/bs";
-import { FaLongArrowAltDown, FaLongArrowAltUp } from "react-icons/fa";
+
+import { getStatusColor } from "@utils";
 
 export const FilterButtonMenu = ({ handleFilter }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -17,9 +18,24 @@ export const FilterButtonMenu = ({ handleFilter }) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = (orderBy) => {
+  const handleClose = (filterBy) => {
     setAnchorEl(null);
-    handleFilter(orderBy);
+    handleFilter(filterBy);
+  };
+
+  const Dot = ({ status }) => {
+    return (
+      <Box
+        component="span"
+        sx={{
+          width: "10px",
+          height: "10px",
+          borderRadius: "50%",
+          backgroundColor: getStatusColor(status),
+          marginRight: "10px",
+        }}
+      ></Box>
+    );
   };
 
   return (
@@ -44,36 +60,19 @@ export const FilterButtonMenu = ({ handleFilter }) => {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem
-          sx={{ fontSize: "13px" }}
-          onClick={() => handleClose("Not Started")}
-        >
-          <FaLongArrowAltDown /> &nbsp; Not Started
-        </MenuItem>
-        <MenuItem
-          sx={{ fontSize: "13px" }}
-          onClick={() => handleClose("Active")}
-        >
-          <FaLongArrowAltUp /> &nbsp; Active
-        </MenuItem>
-        <MenuItem
-          sx={{ fontSize: "13px" }}
-          onClick={() => handleClose("Paused")}
-        >
-          <FaLongArrowAltUp /> &nbsp; Paused
-        </MenuItem>
-        <MenuItem
-          sx={{ fontSize: "13px" }}
-          onClick={() => handleClose("Completed")}
-        >
-          <FaLongArrowAltUp /> &nbsp; Completed
-        </MenuItem>
-        <MenuItem
-          sx={{ fontSize: "13px" }}
-          onClick={() => handleClose("Dropped")}
-        >
-          <FaLongArrowAltUp /> &nbsp; Dropped
-        </MenuItem>
+        {["Not Started", "Active", "Paused", "Completed", "Dropped"].map(
+          (v) => {
+            return (
+              <MenuItem
+                key={v}
+                sx={{ fontSize: "13px" }}
+                onClick={() => handleClose("Not Started")}
+              >
+                <Dot status={v} /> {v} &nbsp;&nbsp;&nbsp;
+              </MenuItem>
+            );
+          }
+        )}
       </Menu>
     </div>
   );

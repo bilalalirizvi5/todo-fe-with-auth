@@ -54,14 +54,13 @@ export const Table = styled(MuiTable)({
 });
 
 export const TableHeader = styled(MuiTableRow)({
-  // border: "1px solid #F5F6F9",
   backgroundColor: "#F5F6F9",
   borderRadius: "4px",
   "& td, & th": { borderBottom: 0 },
+  "& th": { fontWeight: "600", color: "rgb(100,100,100)" },
 });
 
 export const TableRow = styled(MuiTableRow)({
-  // border: "1px solid #F3F3F3",
   backgroundColor: "#fff",
   borderRadius: "4px",
   "& td, & th": {

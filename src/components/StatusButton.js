@@ -1,23 +1,16 @@
 import React from "react";
+
 import { Box, Typography, CircularProgress } from "@mui/material";
 
+import { getStatusColor } from "@utils";
+
 export const StatusButton = ({ loading = false, status, onClick }) => {
-  const getColor = (key) => {
-    let color = {
-      "not started": "#f0f1f2",
-      active: "#acfab3",
-      paused: "#fae3ac",
-      completed: "#ff9c9c",
-      dropped: "#9daaf5",
-    };
-    return color[key?.toLowerCase()];
-  };
   return (
     <Box
       component="button"
       sx={{
         ...styles.statusBtn,
-        backgroundColor: getColor(status),
+        backgroundColor: getStatusColor(status),
       }}
       onClick={onClick}
     >

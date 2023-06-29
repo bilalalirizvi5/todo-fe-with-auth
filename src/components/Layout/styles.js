@@ -24,9 +24,18 @@ const styles = {
     "&:hover": {
       color: "#fff",
       background:
-        "linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(98, 202, 204, 0.1) 100%)",
+        "linear-gradient(90deg, rgba(0, 0, 0, 0.3) 0%, rgba(98, 202, 204, 0.1) 100%)",
       boxShadow: "inset 4px 0px 0px black",
     },
+  },
+  active: {
+    width: "100%",
+    paddingInline: "15px",
+    height: "45px",
+    color: "#fff",
+    background:
+      "linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(98, 202, 204, 0.1) 100%)",
+    boxShadow: "inset 4px 0px 0px black",
   },
   linkText: {
     color: "#fff",

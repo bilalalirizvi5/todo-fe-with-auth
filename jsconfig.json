@@ -9,7 +9,8 @@
       "@images/*": ["assets/images/*"],
       "@redux/*": ["redux/*"],
       "@slices/*": ["redux/slices/*"],
-      "@services/*": ["redux/services/*"]
+      "@services/*": ["redux/services/*"],
+      "@utils": ["utils"]
     }
   },
   "exclude": ["node_modules"]

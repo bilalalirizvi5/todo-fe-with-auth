@@ -2,7 +2,14 @@ import React, { useState } from "react";
 
 import styles from "./styles";
 
-import { Box, Typography, Stack, Grid, Dialog } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Stack,
+  Grid,
+  Dialog,
+  CircularProgress,
+} from "@mui/material";
 
 // Component
 import { Button } from "@styledComponents/Buttons";
@@ -16,8 +23,10 @@ import moment from "moment";
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useSelector } from "react-redux";
 
-const CreateStaffRole = () => {
+const CreateTodo = () => {
+  const { loading } = useSelector((state) => state.todo);
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
@@ -175,7 +184,6 @@ const CreateStaffRole = () => {
                         "& .MuiOutlinedInput-notChedOutline": {
                           border: "1px solid black !important",
                         },
-                        // padding: "0px 20px",
                       }}
                     />
                   </LocalizationProvider>
@@ -190,7 +198,14 @@ const CreateStaffRole = () => {
                 variant="contained"
                 type="submit"
                 sx={{ width: { xs: "100%", sm: "max-content" } }}
+                disabled={loading ? true : false}
               >
+                {loading && (
+                  <CircularProgress
+                    size={15}
+                    sx={{ color: "white", marginRight: "10px" }}
+                  />
+                )}
                 Create
               </Button>
             </Box>
@@ -201,4 +216,4 @@ const CreateStaffRole = () => {
   );
 };
 
-export default CreateStaffRole;
+export default CreateTodo;
