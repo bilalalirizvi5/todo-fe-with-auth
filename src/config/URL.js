@@ -17,8 +17,8 @@ publicAPI.interceptors.request.use((config) => {
 
 export const privateAPI = Axios.create({ baseURL: base_url });
 
-export const attachToken = () => {
-  const jwt = localStorage.getItem("token");
-  publicAPI.defaults.headers.common.Authorization = `Bearer ${jwt}`;
-  console.log("Token Attached");
-};
+// export const attachToken = () => {
+//   const jwt = localStorage.getItem("token");
+//   publicAPI.defaults.headers.common.Authorization = `Bearer ${jwt}`;
+//   console.log("Token Attached");
+// };

@@ -90,7 +90,7 @@ const Home = () => {
                 <TableBody>
                   {todos?.data?.map((v, i) => (
                     <TableRow key={i}>
-                      <TableCell>{i + 1}</TableCell>
+                      <TableCell>{(page - 1) * 10 + i + 1}</TableCell>
                       <TableCell>{v?.todo}</TableCell>
                       <TableCell>{v?.description}</TableCell>
                       <TableCell sx={{ width: "115px" }}>
@@ -100,7 +100,7 @@ const Home = () => {
                         {moment(v?.dueDate).format("DD-MMM-YYYY")}
                       </TableCell>
                       <TableCell>
-                        <UpdateStatus status={v?.status} />
+                        <UpdateStatus status={v?.status} id={v?._id} />
                       </TableCell>
                       <TableCell
                         sx={styles.view}

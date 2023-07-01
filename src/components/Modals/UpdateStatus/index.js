@@ -5,24 +5,36 @@ import styles from "./styles";
 import { Box, Typography, Stack, Dialog } from "@mui/material";
 
 import { StatusButton } from "@components";
+import { useDispatch, useSelector } from "react-redux";
+import { setStatusModal } from "@redux/slices/modalSlice";
+import { updateStatus } from "@redux/services/todo";
+import { setStatusId } from "@redux/slices/todoSlice";
 
-const UpdateStatus = ({ status }) => {
-  const [open, setOpen] = useState(false);
+const UpdateStatus = ({ status, id }) => {
+  const { statusModal } = useSelector((state) => state.modal);
+  const {
+    createLoading,
+    statusId,
+    status: statusForLoading,
+  } = useSelector((state) => state.todo);
+  const dispatch = useDispatch();
 
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    dispatch(setStatusModal(true));
+    dispatch(setStatusId(id));
+  };
   const handleClose = () => {
-    setOpen(false);
+    dispatch(setStatusModal(false));
+    dispatch(setStatusId(""));
   };
 
-  const handleStatusUpdate = (value) => {
-    console.log(value);
-  };
+  const handleStatusUpdate = (value) => updateStatus({ status: value }, id);
 
   return (
     <div>
       <StatusButton status={status} onClick={handleOpen} />
       <Dialog
-        open={open}
+        open={statusId === id && statusModal}
         onClose={handleClose}
         scroll={"body"}
         sx={styles.dialog}
@@ -52,7 +64,12 @@ const UpdateStatus = ({ status }) => {
                     <StatusButton
                       key={i}
                       status={v}
-                      onClick={() => handleStatusUpdate(v)}
+                      onClick={
+                        statusForLoading
+                          ? () => {}
+                          : () => handleStatusUpdate(v)
+                      }
+                      loading={statusForLoading === v && createLoading}
                     />
                   )
                 );

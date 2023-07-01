@@ -5,6 +5,8 @@ const initialState = {
   createLoading: false,
   page: 1,
   filter: "",
+  statusId: "",
+  status: "",
   todos: {
     total: 0,
     data: [],
@@ -22,27 +24,27 @@ export const todoSlice = createSlice({
     setLoading: (state, { payload }) => {
       return { ...state, loading: payload };
     },
-
     setCreateLoading: (state, { payload }) => {
       return { ...state, createLoading: payload };
     },
-
     setFilter: (state, { payload }) => {
       return { ...state, filter: payload, page: 1 };
     },
-
     setPage: (state, { payload }) => {
       return { ...state, page: payload };
     },
-
+    setStatusId: (state, { payload }) => {
+      return { ...state, statusId: payload };
+    },
+    setStatus: (state, { payload }) => {
+      return { ...state, status: payload };
+    },
     setTodos: (state, { payload }) => {
       return { ...state, todos: payload };
     },
-
     setEditTrue: (state, { payload }) => {
       return { ...state, edit: { isEdit: true, editObj: payload } };
     },
-
     setEditFalse: (state) => {
       return { ...state, edit: { isEdit: false, editObj: {} } };
     },
@@ -57,6 +59,8 @@ export const {
   setTodos,
   setEditTrue,
   setEditFalse,
+  setStatusId,
+  setStatus,
 } = todoSlice.actions;
 
 export default todoSlice.reducer;

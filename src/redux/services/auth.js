@@ -33,7 +33,6 @@ export const loginUser = async (payload, resetForm, navigate) => {
   store.dispatch(setLoading());
   try {
     const response = await publicAPI.post("/user/login", userData);
-    console.log(response);
     if (response.status === 200) {
       localStorage.setItem("token", response?.data?.token);
       localStorage.setItem("userId", response?.data?.user?._id);

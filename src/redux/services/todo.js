@@ -8,9 +8,11 @@ import {
   setCreateLoading,
   setEditTrue,
   setLoading,
+  setStatus,
+  setStatusId,
   setTodos,
 } from "@slices/todoSlice";
-import { setCreateTodoModal } from "@redux/slices/modalSlice";
+import { setCreateTodoModal, setStatusModal } from "@redux/slices/modalSlice";
 
 export const createTodo = async (payload, resetForm) => {
   const updatedObj = {
@@ -56,6 +58,7 @@ export const editTodo = (obj) => {
   store.dispatch(setCreateTodoModal(true));
 };
 export const updateTodo = async (payload, resetForm, id) => {
+  const { filter, page } = store.getState().todo;
   const updatedObj = {
     ...payload,
     dueDate: moment(payload.dueDate).endOf("day").format(),
@@ -67,13 +70,35 @@ export const updateTodo = async (payload, resetForm, id) => {
       resetForm();
       swal("Success!", `${response?.data?.message}!`, "success");
       store.dispatch(setCreateTodoModal(false));
-      await getTodo({ status: "All Todo", page: 1 });
+      await getTodo({ status: filter !== "" ? filter : "All Todo", page });
     }
   } catch (error) {
     console.log(error);
     swal("Error!", error?.response?.data?.message || error?.message, "error");
   }
   store.dispatch(setCreateLoading(false));
+};
+export const updateStatus = async (payload, id) => {
+  // const { filter, page } = store.getState().todo;
+  store.dispatch(setStatus(payload.status));
+  store.dispatch(setCreateLoading(true));
+  try {
+    const response = await publicAPI.put(`/todo/update/${id}`, payload);
+    if (response.status === 200) {
+      swal("Success!", `Status updated successfully!`, "success");
+      store.dispatch(setStatusModal(false));
+      store.dispatch(setStatusId(""));
+      await getTodo({
+        status: "All Todo",
+        page: 1,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    swal("Error!", error?.response?.data?.message || error?.message, "error");
+  }
+  store.dispatch(setCreateLoading(false));
+  store.dispatch(setStatus(""));
 };
 
 export const deleteWarning = async (id) => {

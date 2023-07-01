@@ -5,7 +5,7 @@ const initialState = {
   statusModal: false,
 };
 
-export const todoSlice = createSlice({
+export const modalSlice = createSlice({
   name: "modal",
   initialState,
   reducers: {
@@ -18,6 +18,6 @@ export const todoSlice = createSlice({
   },
 });
 
-export const { setCreateTodoModal, setStatusModal } = todoSlice.actions;
+export const { setCreateTodoModal, setStatusModal } = modalSlice.actions;
 
-export default todoSlice.reducer;
+export default modalSlice.reducer;
