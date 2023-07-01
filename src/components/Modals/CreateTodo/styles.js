@@ -16,6 +16,15 @@ const styles = {
     fontSize: "16px",
     fontWeight: 600,
   },
+  mobDatePicker: {
+    "& .MuiInputBase-root": {
+      borderRadius: "8px",
+      height: "40px",
+    },
+    "& .MuiOutlinedInput-notChedOutline": {
+      border: "1px solid black !important",
+    },
+  },
 };
 
 export default styles;

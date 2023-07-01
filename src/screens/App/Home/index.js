@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import {
   Box,
@@ -30,26 +30,33 @@ import {
 import { FilterBox } from "@styledComponents/Filter";
 import { FilterButtonMenu } from "components/FilterButtonMenu";
 
-import { useSelector, useDispatch } from "react-redux";
-import { setPage } from "@redux/slices/todoSlice";
 import moment from "moment";
+import { useSelector, useDispatch } from "react-redux";
+import { setFilter, setPage } from "@redux/slices/todoSlice";
+import { deleteWarning, editTodo, getTodo } from "@redux/services/todo";
 
 const Home = () => {
-  const { loading, page, todos } = useSelector((state) => state.todo);
+  const { filter, loading, page, todos } = useSelector((state) => state.todo);
   const dispatch = useDispatch();
 
-  const handleEdit = (event, id) => {};
+  useEffect(() => {
+    getTodo({ status: filter, page });
+  }, [page, filter]);
 
-  const handleDelete = (event, id) => {};
+  const handleEdit = (_, obj) => editTodo(obj);
+
+  const handleDelete = async (_, id) => deleteWarning(id);
 
   const handlePage = (page) => dispatch(setPage(page));
+
+  const handleFilter = (status) => dispatch(setFilter(status));
 
   return (
     <Box>
       <FilterBox
         sx={{ justifyContent: { xs: "flex-end", sm: "space-between" } }}
       >
-        <FilterButtonMenu handleFilter={() => {}} />
+        <FilterButtonMenu handleFilter={handleFilter} />
       </FilterBox>
       <MainTableContainer mt={2}>
         <TableHeaderTop sx={styles.headerTop}>
@@ -66,7 +73,7 @@ const Home = () => {
                   <TableHeader>
                     <TableCell></TableCell>
                     {[
-                      "Todo",
+                      "Title",
                       "Description",
                       "Created At",
                       "Due Date",
@@ -104,7 +111,7 @@ const Home = () => {
                       <TableCell sx={{ paddingBlock: "0px !important" }}>
                         <EditIcon
                           onClick={(event) => {
-                            handleEdit(event, v?._id);
+                            handleEdit(event, v);
                           }}
                         />
                       </TableCell>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "./styles";
 
@@ -23,24 +23,41 @@ import moment from "moment";
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { createTodo, updateTodo } from "@redux/services/todo";
+import { setCreateTodoModal } from "@redux/slices/modalSlice";
+import { setEditFalse } from "@redux/slices/todoSlice";
 
 const CreateTodo = () => {
-  const { loading } = useSelector((state) => state.todo);
-  const [open, setOpen] = useState(false);
+  const {
+    loading,
+    edit: { isEdit, editObj },
+  } = useSelector((state) => state.todo);
+  const { createTodoModal } = useSelector((state) => state.modal);
+  const dispatch = useDispatch();
 
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => dispatch(setCreateTodoModal(true));
   const handleClose = () => {
-    setOpen(false);
+    dispatch(setCreateTodoModal(false));
     resetForm();
+    if (isEdit) {
+      dispatch(setEditFalse());
+    }
   };
 
-  const createStaffSchema = Yup.object().shape({
+  const createTodoSchema = Yup.object().shape({
     todo: Yup.string().trim().required("Required"),
     description: Yup.string().trim().required("Required"),
     status: Yup.string().required("Required"),
     dueDate: Yup.string().required("Required"),
   });
+
+  const initialValues = {
+    todo: "",
+    description: "",
+    status: "",
+    dueDate: moment(),
+  };
 
   const {
     values,
@@ -52,19 +69,26 @@ const CreateTodo = () => {
     resetForm,
     setFieldValue,
   } = useFormik({
-    initialValues: {
-      todo: "",
-      description: "",
-      status: "",
-      dueDate: moment(),
-    },
-    validationSchema: createStaffSchema,
-    onSubmit: (values) => {
-      _createTodo(values);
+    // enableReinitialize: true,
+    initialValues,
+    validationSchema: createTodoSchema,
+    onSubmit: async (values) => {
+      isEdit
+        ? updateTodo(values, resetForm, editObj?._id)
+        : createTodo(values, resetForm);
     },
   });
 
-  const _createTodo = async (values) => {};
+  useEffect(() => {
+    setFieldValue("todo", editObj?.todo || "");
+    setFieldValue("description", editObj?.description || "");
+    setFieldValue("status", editObj?.status || "");
+    setFieldValue(
+      "dueDate",
+      editObj?.dueDate ? moment(editObj.dueDate) : moment()
+    );
+  }, [editObj, setFieldValue]);
+  // console.log(values);
 
   return (
     <div>
@@ -72,7 +96,7 @@ const CreateTodo = () => {
         Create Todo
       </Button>
       <Dialog
-        open={open}
+        open={createTodoModal}
         onClose={handleClose}
         scroll={"body"}
         sx={styles.dialog}
@@ -90,7 +114,7 @@ const CreateTodo = () => {
               component="h2"
               sx={styles.heading}
             >
-              Create Todo
+              {isEdit ? "Update Todo" : "Create Todo"}
             </Typography>
           </Stack>
           <Box
@@ -154,7 +178,7 @@ const CreateTodo = () => {
                       { value: "Not Started", label: "Not Started" },
                       { value: "Active", label: "Active" },
                       { value: "Paused", label: "Paused" },
-                      { value: "Dropped", label: "Dropped" },
+                      // { value: "Dropped", label: "Dropped" },
                     ]}
                     value={values.status}
                     onChange={handleChange}
@@ -176,15 +200,7 @@ const CreateTodo = () => {
                       name="dueDate"
                       value={values.dueDate}
                       onChange={(date) => setFieldValue("dueDate", date)}
-                      sx={{
-                        "& .MuiInputBase-root": {
-                          borderRadius: "8px",
-                          height: "40px",
-                        },
-                        "& .MuiOutlinedInput-notChedOutline": {
-                          border: "1px solid black !important",
-                        },
-                      }}
+                      sx={styles.mobDatePicker}
                     />
                   </LocalizationProvider>
                   {errors.dueDate && touched.dueDate && errors.dueDate && (
@@ -206,7 +222,7 @@ const CreateTodo = () => {
                     sx={{ color: "white", marginRight: "10px" }}
                   />
                 )}
-                Create
+                {isEdit ? "Update" : "Create"}
               </Button>
             </Box>
           </Box>

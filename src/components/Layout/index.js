@@ -120,21 +120,11 @@ export const Layout = (props) => {
                 <Badge
                   color="error"
                   variant="dot"
-                  invisible={true}
-                  overlap="circular"
-                >
-                  <Box sx={styles.headerIcon}>
-                    <TfiBell color="#64748B" />
-                  </Box>
-                </Badge>
-                <Badge
-                  color="error"
-                  variant="dot"
                   invisible={false}
                   overlap="circular"
                 >
                   <Box sx={styles.headerIcon}>
-                    <BsChatDots color="#64748B" />
+                    <TfiBell color="#64748B" />
                   </Box>
                 </Badge>
               </Stack>

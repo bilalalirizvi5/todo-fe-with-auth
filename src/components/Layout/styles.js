@@ -24,8 +24,8 @@ const styles = {
     "&:hover": {
       color: "#fff",
       background:
-        "linear-gradient(90deg, rgba(0, 0, 0, 0.3) 0%, rgba(98, 202, 204, 0.1) 100%)",
-      boxShadow: "inset 4px 0px 0px black",
+        "linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(98, 202, 204, 0.1) 100%)",
+      boxShadow: "inset -4px 0px 0px black",
     },
   },
   active: {

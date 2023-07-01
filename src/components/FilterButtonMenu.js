@@ -60,19 +60,24 @@ export const FilterButtonMenu = ({ handleFilter }) => {
           "aria-labelledby": "basic-button",
         }}
       >
-        {["Not Started", "Active", "Paused", "Completed", "Dropped"].map(
-          (v) => {
-            return (
-              <MenuItem
-                key={v}
-                sx={{ fontSize: "13px" }}
-                onClick={() => handleClose("Not Started")}
-              >
-                <Dot status={v} /> {v} &nbsp;&nbsp;&nbsp;
-              </MenuItem>
-            );
-          }
-        )}
+        {[
+          "All Todo",
+          "Not Started",
+          "Active",
+          "Paused",
+          "Completed",
+          "Dropped",
+        ].map((v) => {
+          return (
+            <MenuItem
+              key={v}
+              sx={{ fontSize: "13px" }}
+              onClick={() => handleClose(v)}
+            >
+              <Dot status={v} /> {v} &nbsp;&nbsp;&nbsp;
+            </MenuItem>
+          );
+        })}
       </Menu>
     </div>
   );

@@ -1,47 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  loading: false,
+  loading: true,
+  createLoading: false,
   page: 1,
+  filter: "",
   todos: {
-    total: 5,
-    data: [
-      {
-        todo: "Develope Application",
-        description: "This apllication develope using React Js.",
-        createdAt: new Date(),
-        dueDate: new Date(),
-        status: "Not Started",
-      },
-      {
-        todo: "Develope Application",
-        description: "This apllication develope using React Js.",
-        createdAt: new Date(),
-        dueDate: new Date(),
-        status: "Active",
-      },
-      {
-        todo: "Develope Application",
-        description: "This apllication develope using React Js.",
-        createdAt: new Date(),
-        dueDate: new Date(),
-        status: "Paused",
-      },
-      {
-        todo: "Develope Application",
-        description: "This apllication develope using React Js.",
-        createdAt: new Date(),
-        dueDate: new Date(),
-        status: "Dropped",
-      },
-      {
-        todo: "Develope Application",
-        description: "This apllication develope using React Js.",
-        createdAt: new Date(),
-        dueDate: new Date(),
-        status: "Completed",
-      },
-    ],
+    total: 0,
+    data: [],
+  },
+  edit: {
+    isEdit: false,
+    editObj: {},
   },
 };
 
@@ -49,18 +19,44 @@ export const todoSlice = createSlice({
   name: "todo",
   initialState,
   reducers: {
-    setLoading: (state, payload) => {
+    setLoading: (state, { payload }) => {
       return { ...state, loading: payload };
     },
-    setPage: (state, payload) => {
+
+    setCreateLoading: (state, { payload }) => {
+      return { ...state, createLoading: payload };
+    },
+
+    setFilter: (state, { payload }) => {
+      return { ...state, filter: payload, page: 1 };
+    },
+
+    setPage: (state, { payload }) => {
       return { ...state, page: payload };
     },
-    setTodos: (state, payload) => {
+
+    setTodos: (state, { payload }) => {
       return { ...state, todos: payload };
+    },
+
+    setEditTrue: (state, { payload }) => {
+      return { ...state, edit: { isEdit: true, editObj: payload } };
+    },
+
+    setEditFalse: (state) => {
+      return { ...state, edit: { isEdit: false, editObj: {} } };
     },
   },
 });
 
-export const { setLoading, setPage, setTodos } = todoSlice.actions;
+export const {
+  setLoading,
+  setCreateLoading,
+  setFilter,
+  setPage,
+  setTodos,
+  setEditTrue,
+  setEditFalse,
+} = todoSlice.actions;
 
 export default todoSlice.reducer;
