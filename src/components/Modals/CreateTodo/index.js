@@ -30,7 +30,7 @@ import { setEditFalse } from "@redux/slices/todoSlice";
 
 const CreateTodo = () => {
   const {
-    loading,
+    createLoading,
     edit: { isEdit, editObj },
   } = useSelector((state) => state.todo);
   const { createTodoModal } = useSelector((state) => state.modal);
@@ -214,9 +214,9 @@ const CreateTodo = () => {
                 variant="contained"
                 type="submit"
                 sx={{ width: { xs: "100%", sm: "max-content" } }}
-                disabled={loading ? true : false}
+                disabled={createLoading ? true : false}
               >
-                {loading && (
+                {createLoading && (
                   <CircularProgress
                     size={15}
                     sx={{ color: "white", marginRight: "10px" }}

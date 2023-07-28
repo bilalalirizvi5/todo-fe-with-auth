@@ -45,26 +45,28 @@ export const Layout = (props) => {
         &nbsp;
         <Typography>Task Management</Typography>
       </Box>
-      <Navlink
-        to="/"
-        name={"Home"}
-        icon={
-          <AiOutlineHome
-            style={{
-              ...styles.navlinkIcon,
-              fontSize: "16px",
-              marginBottom: "4px",
-            }}
-          />
-        }
-      />
-      <Navlink
-        to="/settings"
-        name={"Settings"}
-        icon={
-          <FiSettings style={{ ...styles.navlinkIcon, fontSize: "16px" }} />
-        }
-      />
+      <Box>
+        <Navlink
+          to="/"
+          name={"Home"}
+          icon={
+            <AiOutlineHome
+              style={{
+                ...styles.navlinkIcon,
+                fontSize: "16px",
+                marginBottom: "4px",
+              }}
+            />
+          }
+        />
+        <Navlink
+          to="/settings"
+          name={"Settings"}
+          icon={
+            <FiSettings style={{ ...styles.navlinkIcon, fontSize: "16px" }} />
+          }
+        />
+      </Box>
     </div>
   );
 
@@ -95,7 +97,9 @@ export const Layout = (props) => {
             onClick={handleDrawerToggle}
             sx={{ display: { md: "none" }, marginLeft: "0px" }}
           >
-            <GiHamburgerMenu style={{ fontSize: "25px", color: "#fff" }} />
+            <GiHamburgerMenu
+              style={{ fontSize: "25px", color: "#fff", marginRight: "20px" }}
+            />
           </IconButton>
           <Box sx={styles.header}>
             <Stack

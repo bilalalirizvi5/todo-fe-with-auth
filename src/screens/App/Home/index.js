@@ -53,9 +53,7 @@ const Home = () => {
 
   return (
     <Box>
-      <FilterBox
-        sx={{ justifyContent: { xs: "flex-end", sm: "space-between" } }}
-      >
+      <FilterBox>
         <FilterButtonMenu handleFilter={handleFilter} />
       </FilterBox>
       <MainTableContainer mt={2}>
@@ -134,7 +132,7 @@ const Home = () => {
                 </TableBody>
               </Table>
             </TableContainer>
-            <PaginationWrapper>
+            <PaginationWrapper className="pagination">
               <Pagination
                 count={Math.ceil(todos?.total / 10)}
                 page={page}

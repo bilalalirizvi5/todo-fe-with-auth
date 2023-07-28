@@ -8,12 +8,12 @@ export const FilterBox = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
   alignItems: "center",
-  justifyContent: "space-between",
+  justifyContent: "flex-start",
   paddingInline: "10px",
   paddingBlock: "8px",
-  [theme.breakpoints.down("sm")]: {
-    justifyContent: "center",
-  },
+  // [theme.breakpoints.down("sm")]: {
+  //   justifyContent: "center",
+  // },
 }));
 
 export const FilterButton = styled(Button)(({ theme }) => ({
@@ -33,7 +33,7 @@ export const FilterButton = styled(Button)(({ theme }) => ({
     background: theme.palette.dark.main2,
     boxShadow: "none",
   },
-  [theme.breakpoints.down("sm")]: {
-    display: "none",
+  [theme.breakpoints.down("md")]: {
+    marginLeft: "20px",
   },
 }));
