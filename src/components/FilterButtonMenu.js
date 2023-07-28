@@ -18,9 +18,13 @@ export const FilterButtonMenu = ({ handleFilter }) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = (filterBy) => {
+  const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleMenu = (filterBy) => {
     handleFilter(filterBy);
+    setAnchorEl(null);
   };
 
   const Dot = ({ status }) => {
@@ -72,7 +76,7 @@ export const FilterButtonMenu = ({ handleFilter }) => {
             <MenuItem
               key={v}
               sx={{ fontSize: "13px" }}
-              onClick={() => handleClose(v)}
+              onClick={() => handleMenu(v)}
             >
               <Dot status={v} /> {v} &nbsp;&nbsp;&nbsp;
             </MenuItem>

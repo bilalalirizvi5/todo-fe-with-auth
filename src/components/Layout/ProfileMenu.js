@@ -13,8 +13,10 @@ import {
   Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "@mui/material/styles";
 
 const ProfileMenu = () => {
+  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
   const navigate = useNavigate();
@@ -59,7 +61,14 @@ const ProfileMenu = () => {
       <div>
         <Box sx={styles.box}>
           <Stack spacing={0.5}>
-            <Typography sx={styles.name}>{userName}</Typography>
+            <Typography
+              sx={{
+                ...styles.name,
+                color: theme.palette.text.main,
+              }}
+            >
+              {userName}
+            </Typography>
             {/* <Typography sx={styles.role}>Admin</Typography> */}
           </Stack>
           {/* <Tooltip title="Account settings"> */}
@@ -75,7 +84,7 @@ const ProfileMenu = () => {
             <Avatar
               src={"/profile.png"}
               alt={`${userName}`}
-              sx={{ width: 45, height: 45 }}
+              sx={{ width: 45, height: 45, backgroundColor: "primary.main" }}
             />
           </IconButton>
           {/* </Tooltip> */}
@@ -132,7 +141,6 @@ const styles = {
     textAlign: "center",
   },
   name: {
-    color: "black",
     textAlign: "right",
     lineHeight: 1,
     fontWeight: 500,

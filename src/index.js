@@ -7,7 +7,7 @@ import App from "./App";
 // Theme
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "./theme";
+import { darkTheme } from "./theme";
 
 // Redux
 import { store } from "./redux/store";
@@ -16,7 +16,7 @@ import { Provider } from "react-redux";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <Provider store={store}>
         <App />

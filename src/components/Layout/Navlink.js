@@ -6,6 +6,8 @@ import { Box, Typography, Stack } from "@mui/material";
 
 import { NavLink } from "react-router-dom";
 
+import { BsArrowRight } from "react-icons/bs";
+
 const Navlink = ({ to, name, icon, count }) => {
   return (
     <NavLink
@@ -22,11 +24,9 @@ const Navlink = ({ to, name, icon, count }) => {
           <Stack sx={{ width: "30px" }}>{icon}</Stack>
           <Typography sx={styles.linkText}>{name}</Typography>
         </Stack>
-        {count && (
-          <Box sx={styles.count}>
-            <Typography>{count}</Typography>
-          </Box>
-        )}
+        <Box sx={styles.activeShow} className="show">
+          <BsArrowRight size={18} />
+        </Box>
       </Stack>
     </NavLink>
   );

@@ -106,7 +106,14 @@ const Home = () => {
                         sx={styles.view}
                         // onClick={() => router.push(`/student/${v?._id}`)}
                       >
-                        View
+                        <Box
+                          component="span"
+                          sx={{
+                            color: "primary.main",
+                          }}
+                        >
+                          View
+                        </Box>
                       </TableCell>
                       <TableCell sx={{ paddingBlock: "0px !important" }}>
                         <EditIcon
@@ -152,5 +159,5 @@ const styles = {
     alignItems: "center !important",
     justifyContent: "space-between !important",
   },
-  view: { cursor: "pointer", color: "#537FE7" },
+  view: { cursor: "pointer" },
 };

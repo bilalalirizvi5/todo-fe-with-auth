@@ -10,7 +10,7 @@
 .loader {
   width: 48px;
   height: 48px;
-  border: 5px dotted #7f3f5e;
+  border: 5px dotted #af5be9;
   border-radius: 50%;
   display: inline-block;
   position: relative;
@@ -21,7 +21,7 @@
 .loader-small {
   width: 20px;
   height: 20px;
-  border: 5px dotted #7f3f5e;
+  border: 5px dotted #af5be9;
   border-radius: 50%;
   display: inline-block;
   position: relative;

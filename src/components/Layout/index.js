@@ -15,13 +15,15 @@ import {
   Badge,
   Typography,
 } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
 // Icon
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FiSearch, FiSettings } from "react-icons/fi";
-import { BsChatDots } from "react-icons/bs";
 import { TfiBell } from "react-icons/tfi";
 import { AiOutlineHome } from "react-icons/ai";
+
+import logo from "../../assets/images/logo.png";
 
 // Component
 import ProfileMenu from "./ProfileMenu";
@@ -31,6 +33,7 @@ const drawerWidth = 260;
 
 export const Layout = (props) => {
   const { window, children } = props;
+  const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
@@ -38,13 +41,21 @@ export const Layout = (props) => {
   const drawer = (
     <div>
       <Box mb={3} sx={styles.logoBox}>
-        <Typography>Todo Application</Typography>
+        <img src={logo} alt="Logo" style={{ width: "25px" }} />
+        &nbsp;
+        <Typography>Task Management</Typography>
       </Box>
       <Navlink
         to="/"
         name={"Home"}
         icon={
-          <AiOutlineHome style={{ ...styles.navlinkIcon, fontSize: "16px" }} />
+          <AiOutlineHome
+            style={{
+              ...styles.navlinkIcon,
+              fontSize: "16px",
+              marginBottom: "4px",
+            }}
+          />
         }
       />
       <Navlink
@@ -69,10 +80,11 @@ export const Layout = (props) => {
         sx={{
           width: { md: `calc(100% - ${drawerWidth}px)` },
           ml: { md: `${drawerWidth}px` },
-          backgroundColor: "#fff",
+          backgroundColor: theme.palette.dark.main,
           height: "70px",
-          boxShadow: "0px 1px 0px #E2E8F0",
+          boxShadow: "none",
           color: "black",
+          borderBottom: `1px solid ${theme.palette.border.main2}`,
         }}
       >
         <Toolbar sx={{ height: "70px" }}>
@@ -83,7 +95,7 @@ export const Layout = (props) => {
             onClick={handleDrawerToggle}
             sx={{ display: { md: "none" }, marginLeft: "0px" }}
           >
-            <GiHamburgerMenu sx={{ fontSize: "30px" }} />
+            <GiHamburgerMenu style={{ fontSize: "25px", color: "#fff" }} />
           </IconButton>
           <Box sx={styles.header}>
             <Stack
@@ -151,9 +163,10 @@ export const Layout = (props) => {
           sx={{
             display: { xs: "block", md: "none" },
             "& .MuiDrawer-paper": {
-              backgroundColor: "primary.main",
+              backgroundColor: theme.palette.dark.main,
               boxSizing: "border-box",
               width: drawerWidth,
+              borderRight: `2px solid ${theme.palette.border.main2}`,
             },
           }}
         >
@@ -166,7 +179,8 @@ export const Layout = (props) => {
           sx={{
             display: { xs: "none", md: "block" },
             "& .MuiDrawer-paper": {
-              backgroundColor: "primary.main",
+              backgroundColor: theme.palette.dark.main,
+              borderRight: `1px solid ${theme.palette.border.main2}`,
               boxSizing: "border-box",
               width: drawerWidth,
             },
@@ -185,7 +199,7 @@ export const Layout = (props) => {
           p: 3,
           padding: { xs: "24px 10px", sm: "24px 24px" },
           width: { sm: `calc(100% - ${drawerWidth}px)` },
-          backgroundColor: "#F1F5F9",
+          backgroundColor: theme.palette.dark.main2,
           minHeight: "100vh",
         }}
       >

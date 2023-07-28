@@ -6,11 +6,9 @@ const styles = {
     justifyContent: "center",
     paddingBlock: "20px",
     "& > p": {
-      color: "#fff",
-      fontWeight: "bold",
-      fontStyle: "italic",
-      fontSize: "20px",
-      textDecoration: "underline",
+      color: "primary.main",
+      fontWeight: "600",
+      fontSize: "18px",
     },
   },
   logo: {
@@ -19,13 +17,17 @@ const styles = {
   },
   linkBox: {
     width: "100%",
-    paddingInline: "15px",
+    paddingLeft: "15px",
+    paddingRight: "6px",
     height: "45px",
+    border: "1px solid transparent",
     "&:hover": {
-      color: "#fff",
-      background:
-        "linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(98, 202, 204, 0.1) 100%)",
-      boxShadow: "inset -4px 0px 0px black",
+      backgroundColor: "dark.main2",
+      borderTopRightRadius: "30px",
+      borderBottomRightRadius: "30px",
+      border: `1px solid`,
+      borderColor: "primary.main",
+      borderLeft: "1px solid transparent",
     },
   },
   active: {
@@ -41,23 +43,21 @@ const styles = {
     color: "#fff",
     fontWeight: "500",
     fontSize: "16px",
+    lineHeight: "normal",
   },
   navlinkIcon: {
     color: "#fff",
     fontSize: "20px",
   },
-  count: {
-    width: "20px",
-    height: "20px",
+  activeShow: {
+    width: "30px",
+    height: "30px",
     borderRadius: "50%",
-    backgroundColor: "red",
+    backgroundColor: "primary.main",
     color: "white",
-    display: "flex",
+    display: "none",
     justifyContent: "center",
     alignItems: "center",
-    "& > p": {
-      fontSize: "13px",
-    },
   },
   header: {
     width: "100%",
@@ -68,9 +68,11 @@ const styles = {
     gap: { xs: "0px", sm: "20px" },
   },
   searchInputBox: {
+    backgroundColor: "dark.main3",
     height: "35px",
     width: "300px",
-    border: "1px solid #AEAEAE",
+    border: "1px solid",
+    borderColor: "border.main2",
     borderRadius: "10px",
     marginLeft: { xs: "0px", md: "40px" },
     display: { xs: "none", sm: "flex" },
@@ -78,11 +80,19 @@ const styles = {
   searchInput: {
     width: "100%",
     paddingInline: "10px",
+    "& input": {
+      color: "text.main",
+    },
     "& input::placeholder": {
       fontSize: "14px",
+      color: "textGray.main !important",
     },
   },
-  searchIcon: { color: "#8A8A8A", fontSize: "18px", marginLeft: "10px" },
+  searchIcon: {
+    color: "#FFFFFF80",
+    fontSize: "18px",
+    marginLeft: "10px",
+  },
   headerIcon: {
     width: "35px",
     height: "35px",
