@@ -6,4 +6,5 @@ export const AuthHeading = styled(Box)(({ theme }) => ({
   fontWeight: "bold",
   marginBottom: "20px",
   marginTop: "15px",
+  color: theme.palette.text.main,
 }));

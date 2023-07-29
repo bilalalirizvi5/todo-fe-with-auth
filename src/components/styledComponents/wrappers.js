@@ -25,8 +25,10 @@ export const AuthBox = styled(Box)(({ theme }) => ({
   gap: "10px",
   borderRadius: "8px",
   padding: "40px 20px",
-  boxShadow: "0px 0px 3px rgb(150,150,150)",
-  backgroundColor: "#fff",
+  boxShadow: "0px 0px 20px rgb(0,0,0)",
+  backgroundColor: theme.palette.dark.main,
+  border: "2px solid",
+  borderColor: theme.palette.border.main2,
   [theme.breakpoints.down("xs")]: {
     width: "100%",
   },
