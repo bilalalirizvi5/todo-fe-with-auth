@@ -21,7 +21,8 @@ import * as Yup from "yup";
 import { loginUser } from "@services/auth";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Divider, Typography } from "@mui/material";
+import { Divider } from "@mui/material";
+import { LogoWithName } from "@components";
 
 const Login = () => {
   const { loading } = useSelector((state) => state.auth);
@@ -56,6 +57,7 @@ const Login = () => {
   return (
     <AuthContainer>
       <AuthBox component="form" onSubmit={handleSubmit} autoComplete="off">
+        <LogoWithName height={"auto"} />
         <AuthHeading>Login</AuthHeading>
         <InputWrapper>
           <Label>Email address</Label>

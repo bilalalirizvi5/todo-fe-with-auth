@@ -143,8 +143,10 @@ const styles = {
   name: {
     textAlign: "right",
     lineHeight: 1,
-    fontWeight: 500,
+    fontWeight: 600,
     fontSize: "16px",
+    display: { xs: "block", md: "none" },
+    width: "max-content",
   },
   role: {
     color: "#637381",

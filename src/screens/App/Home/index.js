@@ -24,7 +24,7 @@ import {
   CreateTodo,
   DeleteIcon,
   EditIcon,
-  Loader,
+  // Loader,
   UpdateStatus,
 } from "@components";
 import { FilterBox } from "@styledComponents/Filter";
@@ -34,6 +34,8 @@ import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 import { setFilter, setPage } from "@redux/slices/todoSlice";
 import { deleteWarning, editTodo, getTodo } from "@redux/services/todo";
+
+import Skeleton from "./Skeleton";
 
 const Home = () => {
   const { filter, loading, page, todos } = useSelector((state) => state.todo);
@@ -62,7 +64,7 @@ const Home = () => {
           <CreateTodo />
         </TableHeaderTop>
         {loading ? (
-          <Loader />
+          <Skeleton />
         ) : (
           <MainTable>
             <TableContainer>

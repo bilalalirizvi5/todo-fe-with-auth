@@ -22,6 +22,7 @@ import { useSelector } from "react-redux";
 import { createUser } from "@services/auth";
 import { useNavigate } from "react-router-dom";
 import { Divider } from "@mui/material";
+import { LogoWithName } from "@components";
 
 const Signup = () => {
   const { loading } = useSelector((state) => state.auth);
@@ -65,6 +66,7 @@ const Signup = () => {
   return (
     <AuthContainer>
       <AuthBox component="form" onSubmit={handleSubmit} autoComplete="off">
+        <LogoWithName height={"auto"} />
         <AuthHeading>Sign Up</AuthHeading>
         <InputWrapper>
           <Label>Your Full Name</Label>

@@ -101,6 +101,6 @@ export const PaginationWrapper = styled(Box)(({ theme }) => ({
     borderColor: theme.palette.primary.main,
   },
   "& .Mui-selected": {
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: "#af5be9 !important",
   },
 }));

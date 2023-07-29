@@ -13,21 +13,25 @@ import {
   Stack,
   TextField,
   Badge,
+  Avatar,
   Typography,
+  Button,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 // Icon
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FiSearch, FiSettings } from "react-icons/fi";
-import { TfiBell } from "react-icons/tfi";
 import { AiOutlineHome } from "react-icons/ai";
-
-import logo from "../../assets/images/logo.png";
+import { HiOutlineLogout } from "react-icons/hi";
+import { FaBell } from "react-icons/fa";
 
 // Component
 import ProfileMenu from "./ProfileMenu";
 import Navlink from "./Navlink";
+import { LogoWithName } from "../LogoWithName";
+
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 260;
 
@@ -35,17 +39,21 @@ export const Layout = (props) => {
   const { window, children } = props;
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const navigate = useNavigate();
+  const userName = localStorage.getItem("userName");
+  const email = localStorage.getItem("email");
 
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
+  const logout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
+
   const drawer = (
     <div>
-      <Box mb={3} sx={styles.logoBox}>
-        <img src={logo} alt="Logo" style={{ width: "25px" }} />
-        &nbsp;
-        <Typography>Task Management</Typography>
-      </Box>
-      <Box>
+      <LogoWithName />
+      <Box style={styles.sideBarBody}>
         <Navlink
           to="/"
           name={"Home"}
@@ -66,6 +74,27 @@ export const Layout = (props) => {
             <FiSettings style={{ ...styles.navlinkIcon, fontSize: "16px" }} />
           }
         />
+      </Box>
+      <Box sx={styles.sideBarFooter}>
+        <Box sx={styles.sideBarFooterTop}>
+          <Avatar
+            src={"/profile.png"}
+            alt={`${userName}`}
+            sx={{ width: 45, height: 45, backgroundColor: "primary.main" }}
+          />
+          <Box sx={styles.sideBarFooterTextBox}>
+            <Typography sx={styles.sideBarFooterText1}>{userName}</Typography>
+            <Typography sx={styles.sideBarFooterText2}>{email}</Typography>
+          </Box>
+        </Box>
+        <Button
+          sx={styles.sideBarFooterButton}
+          variant="contained"
+          startIcon={<HiOutlineLogout />}
+          onClick={logout}
+        >
+          Logout
+        </Button>
       </Box>
     </div>
   );
@@ -117,7 +146,7 @@ export const Layout = (props) => {
                 }}
               />
             </Stack>
-            <Stack direction="row" alignItems="center" spacing={3}>
+            <Stack direction="row" alignItems="center" spacing={2}>
               <Stack
                 direction="row"
                 spacing={2}
@@ -129,9 +158,12 @@ export const Layout = (props) => {
                   invisible={true}
                   overlap="circular"
                 >
-                  <Box sx={styles.headerIcon}>
-                    <FiSettings color="#64748B" />
-                  </Box>
+                  <FiSettings
+                    size={25}
+                    color={"#fff"}
+                    style={{ cursor: "pointer" }}
+                    onClick={() => navigate("/settings")}
+                  />
                 </Badge>
                 <Badge
                   color="error"
@@ -139,9 +171,11 @@ export const Layout = (props) => {
                   invisible={false}
                   overlap="circular"
                 >
-                  <Box sx={styles.headerIcon}>
-                    <TfiBell color="#64748B" />
-                  </Box>
+                  <FaBell
+                    size={25}
+                    color={"#fff"}
+                    style={{ cursor: "pointer" }}
+                  />
                 </Badge>
               </Stack>
               <ProfileMenu />

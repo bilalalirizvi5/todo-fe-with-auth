@@ -1,16 +1,4 @@
 const styles = {
-  logoBox: {
-    width: "100%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingBlock: "20px",
-    "& > p": {
-      color: "primary.main",
-      fontWeight: "600",
-      fontSize: "18px",
-    },
-  },
   logo: {
     width: "100px",
     height: "auto",
@@ -93,16 +81,56 @@ const styles = {
     fontSize: "18px",
     marginLeft: "10px",
   },
-  headerIcon: {
-    width: "35px",
-    height: "35px",
-    borderRadius: "50%",
-    background: "#EFF4FB",
-    border: "0.5px solid #E2E8F0",
+
+  sideBarBody: {
+    width: "100%",
+    height: "calc(100vh - 195px)",
+    overflowY: "auto",
+    paddingTop: "24px",
+  },
+
+  sideBarFooter: {
+    width: "100%",
+    height: "130px",
+    paddingInline: "20px",
+  },
+  sideBarFooterTop: {
+    width: "100%",
     display: "flex",
-    justifyContent: "center",
+    flexDirection: "row",
+    gap: "10px",
+    paddingTop: "20px",
+    borderTop: "3px solid",
+    borderTopColor: "border.main2",
     alignItems: "center",
-    cursor: "pointer",
+  },
+  sideBarFooterTextBox: {
+    width: "calc(100% - 55px)",
+  },
+  sideBarFooterText1: {
+    color: "text.main",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    fontWeight: 600,
+    lineHeight: 1,
+    marginBottom: "3px",
+  },
+  sideBarFooterText2: {
+    color: "textGray.main",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    fontSize: "12px",
+    lineHeight: 1,
+  },
+  sideBarFooterButton: {
+    marginLeft: "55px",
+    marginTop: "5px",
+    height: "27px",
+    textTransform: "initial",
+    letterSpacing: "0.5px",
+    fontWeight: 600,
   },
 };
 
