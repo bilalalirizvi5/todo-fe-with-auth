@@ -40,7 +40,7 @@ function TabPanel(props) {
             height: "450px",
           }}
         >
-          <Box>{children}</Box>
+          <Box sx={{ width: "100%" }}>{children}</Box>
         </Box>
       )}
     </div>

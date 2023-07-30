@@ -1,9 +1,17 @@
 import React, { useState } from "react";
-import { Avatar, Box, Button, Stack, Typography } from "@mui/material";
+import {
+  Avatar,
+  Button,
+  CircularProgress,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import swal from "sweetalert";
+import { updateUser } from "@redux/services/setting";
 
 const ProfilePicture = () => {
+  const { loading } = useSelector((state) => state.setting);
   const authState = useSelector((state) => state.auth);
   const [photo, setPhoto] = useState(null);
   const [photoError, setPhotoError] = useState(false);
@@ -27,12 +35,7 @@ const ProfilePicture = () => {
 
   const handleClick = () => {
     if (photo) {
-      // dispatch(
-      //   updatePicture({
-      //     file: photo,
-      //     uid: authState.uid,
-      //   })
-      // );
+      dispatch(updateUser({ file: photo }));
     } else {
       swal("", `${photoError ? "Invalid type" : "Choose picture"}`, "error");
     }
@@ -101,11 +104,11 @@ const ProfilePicture = () => {
       </Stack>
       <Stack mt={10}>
         <Button
-          onClick={handleClick}
+          onClick={loading ? () => {} : handleClick}
           variant="contained"
           sx={{ width: "150px" }}
         >
-          Save
+          {loading && <CircularProgress size={15} color={"text"} />} &nbsp; Save
         </Button>
       </Stack>
     </>

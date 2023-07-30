@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, CircularProgress, Stack, Typography } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { InputWrapper } from "@styledComponents/wrappers";
 import { ErrorText, Label, TextField } from "@styledComponents/Inputs";
+import { updateUser } from "@redux/services/setting";
 
 const validateEmail = (email) => {
   return String(email)
@@ -13,6 +14,7 @@ const validateEmail = (email) => {
 };
 
 const EmailAddress = () => {
+  const { loading } = useSelector((state) => state.setting);
   const [email, setEmail] = useState(localStorage.getItem("email"));
   const [emailError, setEmailError] = useState(false);
   const [message, setMessage] = useState("");
@@ -23,12 +25,7 @@ const EmailAddress = () => {
     let oldEmail = localStorage.getItem("email").toLowerCase();
     if (newEmail !== oldEmail) {
       if (validateEmail(newEmail)) {
-        // dispatch(
-        //   updateEmail({
-        //     email: newEmail,
-        //     docId: authState.docId,
-        //   })
-        // );
+        dispatch(updateUser({ email: newEmail }));
       } else {
         newEmail === ""
           ? setMessage("Please fill the text field")
@@ -64,11 +61,11 @@ const EmailAddress = () => {
       </InputWrapper>
       <Stack mt={10}>
         <Button
-          onClick={handleClick}
+          onClick={loading ? () => {} : handleClick}
           variant="contained"
           sx={{ width: "150px" }}
         >
-          Save
+          {loading && <CircularProgress size={15} color={"text"} />} &nbsp; Save
         </Button>
       </Stack>
     </>

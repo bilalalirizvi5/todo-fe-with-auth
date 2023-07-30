@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, CircularProgress, Stack, Typography } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { InputWrapper } from "@styledComponents/wrappers";
 import { ErrorText, Label, TextField } from "@styledComponents/Inputs";
-// import { CustomButton, TextFieldLabel } from "@components";
-// import { updateDisplayName } from "../../redux/actions/settingActions";
+import { updateUser } from "@redux/services/setting";
 
 const DisplayName = () => {
+  const { loading } = useSelector((state) => state.setting);
   const [displayName, setDisplayName] = useState(
     localStorage.getItem("userName")
   );
@@ -19,12 +19,7 @@ const DisplayName = () => {
     let oldName = localStorage.getItem("userName").toLowerCase();
     if (newName !== oldName) {
       if (newName !== "") {
-        // dispatch(
-        //   updateDisplayName({
-        //     name: displayName,
-        //     docId: authState.docId,
-        //   })
-        // );
+        dispatch(updateUser({ displayName }));
       } else {
         setMessage("Please fill the text field");
         setDisplayNameError(true);
@@ -58,11 +53,11 @@ const DisplayName = () => {
       </InputWrapper>
       <Stack mt={10} sx={{ alignSelf: "flex-end !important" }}>
         <Button
-          onClick={handleClick}
+          onClick={loading ? () => {} : handleClick}
           variant="contained"
           sx={{ width: "150px" }}
         >
-          Save
+          {loading && <CircularProgress size={15} color={"text"} />} &nbsp; Save
         </Button>
       </Stack>
     </>

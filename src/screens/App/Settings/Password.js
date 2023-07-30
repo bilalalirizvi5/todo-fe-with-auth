@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, CircularProgress, Stack, Typography } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { InputWrapper } from "@styledComponents/wrappers";
 import { ErrorText, Label, TextField } from "@styledComponents/Inputs";
+import { updateUser } from "@redux/services/setting";
 
 const Password = () => {
+  const { loading } = useSelector((state) => state.setting);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState({
@@ -39,16 +41,16 @@ const Password = () => {
       });
       return;
     }
-    // dispatch(updatePassword(password));
+    dispatch(updateUser({ password }));
   };
 
   return (
     <>
       <Typography mb={5} variant="h5" sx={{ color: "text.main" }}>
-        Edit Email Address
+        Edit Password
       </Typography>
       <InputWrapper mb={2}>
-        <Label>Enter your name</Label>
+        <Label>Password</Label>
         <TextField
           fullWidth
           size="small"
@@ -64,7 +66,7 @@ const Password = () => {
         {passwordError.error && <ErrorText>{passwordError.message}</ErrorText>}
       </InputWrapper>
       <InputWrapper>
-        <Label>Enter your name</Label>
+        <Label>Confirm Password</Label>
         <TextField
           fullWidth
           size="small"
@@ -83,11 +85,11 @@ const Password = () => {
       </InputWrapper>
       <Stack mt={10}>
         <Button
-          onClick={handleClick}
+          onClick={loading ? () => {} : handleClick}
           variant="contained"
           sx={{ width: "150px" }}
         >
-          Save
+          {loading && <CircularProgress size={15} color={"text"} />} &nbsp; Save
         </Button>
       </Stack>
     </>
