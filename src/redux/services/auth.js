@@ -1,6 +1,6 @@
 import { publicAPI } from "@config";
 import { store } from "@redux/store";
-import { setLoading } from "@slices/authSlice";
+import { setLoading, setUserInit } from "@slices/authSlice";
 import swal from "sweetalert";
 
 export const createUser = async (payload, resetForm, navigate) => {
@@ -34,10 +34,12 @@ export const loginUser = async (payload, resetForm, navigate) => {
   try {
     const response = await publicAPI.post("/user/login", userData);
     if (response.status === 200) {
+      store.dispatch(setUserInit(response?.data?.user));
       localStorage.setItem("token", response?.data?.token);
       localStorage.setItem("email", response?.data?.user?.email);
       localStorage.setItem("userId", response?.data?.user?._id);
       localStorage.setItem("userName", response?.data?.user?.userName);
+      localStorage.setItem("photoUrl", response?.data?.user?.photoUrl);
       localStorage.setItem(
         "passwordRecoveryToken",
         response?.data?.user?.passwordRecoveryToken

@@ -32,6 +32,8 @@ import Navlink from "./Navlink";
 import { LogoWithName } from "../LogoWithName";
 
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Notification from "./Notification";
 
 const drawerWidth = 260;
 
@@ -40,8 +42,7 @@ export const Layout = (props) => {
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const navigate = useNavigate();
-  const userName = localStorage.getItem("userName");
-  const email = localStorage.getItem("email");
+  const STATE = useSelector((state) => state.auth.user);
 
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
@@ -78,13 +79,17 @@ export const Layout = (props) => {
       <Box sx={styles.sideBarFooter}>
         <Box sx={styles.sideBarFooterTop}>
           <Avatar
-            src={"/profile.png"}
-            alt={`${userName}`}
+            src={STATE?.photoUrl}
+            alt={`${STATE?.userName}`}
             sx={{ width: 45, height: 45, backgroundColor: "primary.main" }}
           />
           <Box sx={styles.sideBarFooterTextBox}>
-            <Typography sx={styles.sideBarFooterText1}>{userName}</Typography>
-            <Typography sx={styles.sideBarFooterText2}>{email}</Typography>
+            <Typography sx={styles.sideBarFooterText1}>
+              {STATE?.userName}
+            </Typography>
+            <Typography sx={styles.sideBarFooterText2}>
+              {STATE?.email}
+            </Typography>
           </Box>
         </Box>
         <Button
@@ -171,11 +176,7 @@ export const Layout = (props) => {
                   invisible={false}
                   overlap="circular"
                 >
-                  <FaBell
-                    size={25}
-                    color={"#fff"}
-                    style={{ cursor: "pointer" }}
-                  />
+                  <Notification />
                 </Badge>
               </Stack>
               <ProfileMenu />

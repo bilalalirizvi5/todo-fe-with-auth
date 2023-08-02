@@ -25,6 +25,20 @@ const styles = {
       border: "1px solid black !important",
     },
   },
+  input: {
+    "& .MuiOutlinedInput-root": {
+      "&.Mui-focused fieldset": {
+        border: "1px solid #000 !important",
+      },
+      "&:hover fieldset": {
+        borderColor: "#000",
+      },
+    },
+    "& input": {
+      color: "black",
+      backgroundColor: "#fff",
+    },
+  },
 };
 
 export default styles;

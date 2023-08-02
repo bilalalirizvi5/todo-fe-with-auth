@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, CircularProgress, Stack, Typography } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { InputWrapper } from "@styledComponents/wrappers";
 import { ErrorText, Label, TextField } from "@styledComponents/Inputs";
 import { updateUser } from "@redux/services/setting";
@@ -17,9 +17,8 @@ const Password = () => {
     error: false,
     message: "",
   });
-  const dispatch = useDispatch();
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (password.length < 8) {
       setPasswordError({
         error: true,
@@ -41,7 +40,7 @@ const Password = () => {
       });
       return;
     }
-    dispatch(updateUser({ password }));
+    await updateUser({ password });
   };
 
   return (

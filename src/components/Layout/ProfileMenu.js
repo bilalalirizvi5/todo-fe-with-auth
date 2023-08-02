@@ -14,13 +14,14 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
+import { useSelector } from "react-redux";
 
 const ProfileMenu = () => {
+  const STATE = useSelector((state) => state.auth.user);
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
   const navigate = useNavigate();
-  const userName = localStorage.getItem("userName");
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -67,7 +68,7 @@ const ProfileMenu = () => {
                 color: theme.palette.text.main,
               }}
             >
-              {userName}
+              {STATE?.userName}
             </Typography>
             {/* <Typography sx={styles.role}>Admin</Typography> */}
           </Stack>
@@ -82,8 +83,8 @@ const ProfileMenu = () => {
             disableRipple
           >
             <Avatar
-              src={"/profile.png"}
-              alt={`${userName}`}
+              src={STATE?.photoUrl}
+              alt={`${STATE?.userName}`}
               sx={{ width: 45, height: 45, backgroundColor: "primary.main" }}
             />
           </IconButton>

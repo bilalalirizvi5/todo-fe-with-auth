@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, CircularProgress, Stack, Typography } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { InputWrapper } from "@styledComponents/wrappers";
 import { ErrorText, Label, TextField } from "@styledComponents/Inputs";
 import { updateUser } from "@redux/services/setting";
@@ -18,14 +18,13 @@ const EmailAddress = () => {
   const [email, setEmail] = useState(localStorage.getItem("email"));
   const [emailError, setEmailError] = useState(false);
   const [message, setMessage] = useState("");
-  const dispatch = useDispatch();
 
-  const handleClick = () => {
+  const handleClick = async () => {
     let newEmail = email.trim().toLowerCase();
     let oldEmail = localStorage.getItem("email").toLowerCase();
     if (newEmail !== oldEmail) {
       if (validateEmail(newEmail)) {
-        dispatch(updateUser({ email: newEmail }));
+        await updateUser({ email: newEmail });
       } else {
         newEmail === ""
           ? setMessage("Please fill the text field")

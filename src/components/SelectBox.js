@@ -53,15 +53,23 @@ export const SelectBox = (props) => {
 
 const styles = {
   textField: {
+    // "& .MuiOutlinedInput-root": {
+    //   backgroundColor: "#fff",
+    //   borderRadius: "8px",
+    //   "&.Mui-focused fieldset": {
+    //     border: "1px solid black !important",
+    //   },
+    // },
+    // "& input::placeholder": {
+    //   fontSize: "14px",
+    // },
     "& .MuiOutlinedInput-root": {
-      backgroundColor: "#fff",
-      borderRadius: "8px",
       "&.Mui-focused fieldset": {
-        border: "1px solid black",
+        border: "1px solid #000 !important",
       },
-    },
-    "& input::placeholder": {
-      fontSize: "14px",
+      "&:hover fieldset": {
+        borderColor: "#000",
+      },
     },
   },
   selectText: {

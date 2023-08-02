@@ -143,6 +143,7 @@ const CreateTodo = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     placeholder="Your Todo here"
+                    sx={styles.input}
                   />
                   {errors.todo && touched.todo && errors.todo && (
                     <ErrorText>{errors.todo}</ErrorText>
@@ -161,6 +162,7 @@ const CreateTodo = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     placeholder="Description here"
+                    sx={styles.input}
                   />
                   {errors.description &&
                     touched.description &&
