@@ -54,8 +54,8 @@ const ProfileMenu = () => {
 
 const styles = {
   avatar: {
-    width: 45,
-    height: 45,
+    width: 35,
+    height: 35,
     backgroundColor: "primary.main",
     cursor: "pointer",
   },

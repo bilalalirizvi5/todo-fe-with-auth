@@ -30,6 +30,7 @@ import { FaBell } from "react-icons/fa";
 import ProfileMenu from "./ProfileMenu";
 import Navlink from "./Navlink";
 import { LogoWithName } from "../LogoWithName";
+import { AvatarWithPreview } from "../AvatarWithPreview";
 
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -52,37 +53,31 @@ export const Layout = (props) => {
   };
 
   const drawer = (
-    <div>
+    <Box sx={styles.drawer}>
       <LogoWithName />
       <Box style={styles.sideBarBody}>
         <Navlink
           to="/"
-          name={"Home"}
+          name={"Todo"}
           icon={
             <AiOutlineHome
               style={{
-                ...styles.navlinkIcon,
-                fontSize: "16px",
-                marginBottom: "4px",
+                marginBottom: "3px",
               }}
+              color={"#fff"}
+              size={18}
             />
           }
         />
         <Navlink
           to="/settings"
           name={"Settings"}
-          icon={
-            <FiSettings style={{ ...styles.navlinkIcon, fontSize: "16px" }} />
-          }
+          icon={<FiSettings color={"#fff"} size={18} />}
         />
       </Box>
       <Box sx={styles.sideBarFooter}>
         <Box sx={styles.sideBarFooterTop}>
-          <Avatar
-            src={STATE?.photoUrl}
-            alt={`${STATE?.userName}`}
-            sx={{ width: 45, height: 45, backgroundColor: "primary.main" }}
-          />
+          <AvatarWithPreview imageUrl={STATE?.photoUrl} size={45} />
           <Box sx={styles.sideBarFooterTextBox}>
             <Typography sx={styles.sideBarFooterText1}>
               {STATE?.userName}
@@ -101,7 +96,7 @@ export const Layout = (props) => {
           Logout
         </Button>
       </Box>
-    </div>
+    </Box>
   );
 
   const container =

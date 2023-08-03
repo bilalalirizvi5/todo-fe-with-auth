@@ -35,7 +35,7 @@ const styles = {
   },
   navlinkIcon: {
     color: "#fff",
-    fontSize: "20px",
+    fontSize: "22px",
   },
   activeShow: {
     width: "30px",
@@ -82,10 +82,16 @@ const styles = {
     fontSize: "18px",
     marginLeft: "10px",
   },
-
+  drawer: {
+    width: "100%",
+    height: "100vh",
+    display: "flex",
+    flexDirection: "column",
+  },
   sideBarBody: {
     width: "100%",
-    height: "calc(100vh - 195px)",
+    // height: "calc(100vh - 195px)",
+    flex: 1,
     overflowY: "auto",
     paddingTop: "24px",
   },

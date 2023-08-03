@@ -10,6 +10,7 @@ import {
 import { useSelector } from "react-redux";
 import swal from "sweetalert";
 import { updateProfilePicture } from "@redux/services/setting";
+import { AvatarWithPreview } from "@components";
 
 const ProfilePicture = () => {
   const STATE = useSelector((state) => state.auth.user);
@@ -49,10 +50,9 @@ const ProfilePicture = () => {
         Edit Profile Picture
       </Typography>
       <Stack direction="row" alignItems="center" spacing={2}>
-        <Avatar
-          alt={authState?.name}
-          src={ImageSrc || authState?.photoUrl}
-          sx={{ width: "80px", height: "80px", color: "black" }}
+        <AvatarWithPreview
+          imageUrl={ImageSrc || authState?.photoUrl}
+          size={80}
         />
         <Stack>
           <Typography
