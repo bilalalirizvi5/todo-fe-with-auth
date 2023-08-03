@@ -58,11 +58,12 @@ const styles = {
   searchInputBox: {
     backgroundColor: "dark.main3",
     height: "35px",
-    width: "300px",
+    width: { sm: "100%", md: "300px" },
     border: "1px solid",
     borderColor: "border.main2",
     borderRadius: "10px",
     marginLeft: { xs: "0px", md: "40px" },
+    marginRight: { xs: "10px", md: "0px" },
     display: { xs: "none", sm: "flex" },
   },
   searchInput: {

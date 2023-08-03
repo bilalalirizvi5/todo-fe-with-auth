@@ -1,145 +1,63 @@
+import { Avatar, Menu, MenuItem, Stack, Typography } from "@mui/material";
 import * as React from "react";
-import {
-  ClickAwayListener,
-  Grow,
-  Paper,
-  Popper,
-  MenuItem,
-  MenuList,
-  Stack,
-  Avatar,
-  Box,
-  IconButton,
-  Typography,
-} from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { useTheme } from "@mui/material/styles";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const ProfileMenu = () => {
   const STATE = useSelector((state) => state.auth.user);
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef(null);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
   const navigate = useNavigate();
 
-  const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
+  const handleClick = (event) => setAnchorEl(event.currentTarget);
 
-  const handleClose = (event, trigger) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return;
-    }
+  const handleClose = (trigger) => {
+    setAnchorEl(null);
     if (trigger === "logout") {
       localStorage.clear();
       navigate("/login");
     }
-    setOpen(false);
   };
 
-  function handleListKeyDown(event) {
-    if (event.key === "Tab") {
-      event.preventDefault();
-      setOpen(false);
-    } else if (event.key === "Escape") {
-      setOpen(false);
-    }
-  }
-
-  // return focus to the button when we transitioned from !open -> open
-  const prevOpen = React.useRef(open);
-  React.useEffect(() => {
-    if (prevOpen.current === true && open === false) {
-      anchorRef.current.focus();
-    }
-
-    prevOpen.current = open;
-  }, [open]);
-
   return (
-    <Stack direction="row" spacing={2}>
-      <div>
-        <Box sx={styles.box}>
-          <Stack spacing={0.5}>
-            <Typography
-              sx={{
-                ...styles.name,
-                color: theme.palette.text.main,
-              }}
-            >
-              {STATE?.userName}
-            </Typography>
-            {/* <Typography sx={styles.role}>Admin</Typography> */}
-          </Stack>
-          {/* <Tooltip title="Account settings"> */}
-          <IconButton
-            ref={anchorRef}
-            id="composition-button"
-            aria-controls={open ? "composition-menu" : undefined}
-            aria-expanded={open ? "true" : undefined}
-            aria-haspopup="true"
-            onClick={handleToggle}
-            disableRipple
-          >
-            <Avatar
-              src={STATE?.photoUrl}
-              alt={`${STATE?.userName}`}
-              sx={{ width: 45, height: 45, backgroundColor: "primary.main" }}
-            />
-          </IconButton>
-          {/* </Tooltip> */}
-        </Box>
-
-        <Popper
-          open={open}
-          anchorEl={anchorRef.current}
-          role={undefined}
-          placement="bottom-end"
-          transition
-          disablePortal
-          sx={{ minWidth: "150px" }}
-        >
-          {({ TransitionProps, placement }) => (
-            <Grow
-              {...TransitionProps}
-              style={{
-                transformOrigin:
-                  placement === "bottom-start" ? "left top" : "left bottom",
-              }}
-            >
-              <Paper>
-                <ClickAwayListener onClickAway={handleClose}>
-                  <MenuList
-                    autoFocusItem={open}
-                    id="composition-menu"
-                    aria-labelledby="composition-button"
-                    onKeyDown={handleListKeyDown}
-                  >
-                    {/* <MenuItem onClick={handleClose}>Profile</MenuItem> */}
-                    {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
-                    <MenuItem onClick={(e) => handleClose(e, "logout")}>
-                      Logout
-                    </MenuItem>
-                  </MenuList>
-                </ClickAwayListener>
-              </Paper>
-            </Grow>
-          )}
-        </Popper>
-      </div>
-    </Stack>
+    <React.Fragment>
+      <Stack direction="row" alignItems={"center"} spacing={1}>
+        <Typography sx={styles.name}>{STATE?.userName}</Typography>
+        <Avatar
+          onClick={handleClick}
+          aria-controls={open ? "account-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          src={STATE?.photoUrl}
+          alt={`${STATE?.userName}`}
+          sx={styles.avatar}
+        />
+      </Stack>
+      <Menu
+        anchorEl={anchorEl}
+        id="account-menu"
+        open={open}
+        onClose={handleClose}
+        onClick={handleClose}
+        PaperProps={styles.paperProps}
+        transformOrigin={{ horizontal: "right", vertical: "top" }}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+      >
+        <MenuItem onClick={() => handleClose("logout")} sx={{ width: "200px" }}>
+          Logout
+        </MenuItem>
+      </Menu>
+    </React.Fragment>
   );
 };
 
-export default ProfileMenu;
-
 const styles = {
-  box: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    textAlign: "center",
+  avatar: {
+    width: 45,
+    height: 45,
+    backgroundColor: "primary.main",
+    cursor: "pointer",
   },
   name: {
     textAlign: "right",
@@ -148,12 +66,34 @@ const styles = {
     fontSize: "16px",
     display: { xs: "block", md: "none" },
     width: "max-content",
+    color: "text.main",
   },
-  role: {
-    color: "#637381",
-    textAlign: "right",
-    lineHeight: 1,
-    fontWeight: 500,
-    fontSize: "12px",
+  paperProps: {
+    elevation: 0,
+    sx: {
+      overflow: "visible",
+      filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+      mt: 1.5,
+      "& .MuiAvatar-root": {
+        width: 32,
+        height: 32,
+        ml: -0.5,
+        mr: 1,
+      },
+      "&:before": {
+        content: '""',
+        display: "block",
+        position: "absolute",
+        top: 0,
+        right: 14,
+        width: 10,
+        height: 10,
+        bgcolor: "background.paper",
+        transform: "translateY(-50%) rotate(45deg)",
+        zIndex: 0,
+      },
+    },
   },
 };
+
+export default ProfileMenu;
